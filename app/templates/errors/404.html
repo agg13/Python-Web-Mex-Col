@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Página no encontrada | Tienda didáctica{% endblock %}
+
+{% block content %}
+<section class="empty-state">
+    <p class="eyebrow">Error 404</p>
+    <h1>Página no encontrada</h1>
+    <p>La dirección solicitada no existe dentro del ejercicio.</p>
+    <a class="button button-primary" href="{{ url_for('main.home') }}">Volver al inicio</a>
+</section>
+{% endblock %}

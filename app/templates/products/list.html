@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Productos | Tienda didáctica{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">Catálogo en memoria</p>
+        <h1>Productos disponibles</h1>
+        <p>Se muestran {{ products|length }} registros. Los cambios se conservan únicamente mientras el proceso de Flask permanezca activo.</p>
+    </div>
+    <a class="button button-primary" href="{{ url_for('products.create_product') }}">Registrar producto</a>
+</section>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Clasificación</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Existencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>
+                        <strong>{{ product.name }}</strong>
+                        <span class="secondary-text">{{ product.description }}</span>
+                    </td>
+                    <td>
+                        {{ product.category }}
+                        <span class="secondary-text">{{ product.subcategory }}</span>
+                    </td>
+                    <td class="number">${{ "%.2f"|format(product.price) }}</td>
+                    <td class="number">
+                        <span class="stock {% if product.stock_quantity == 0 %}stock-empty{% endif %}">
+                            {{ product.stock_quantity }}
+                        </span>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5">No existen productos registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

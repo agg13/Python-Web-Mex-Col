@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar producto | Tienda didáctica{% endblock %}
+
+{% block content %}
+<section class="narrow-page">
+    <p class="eyebrow">Operación guiada</p>
+    <h1>Registrar producto</h1>
+    <p>Completa todos los campos. El identificador se asignará automáticamente.</p>
+
+    <form method="post" class="form-card" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="field">
+            {{ form.name.label }}
+            {{ form.name() }}
+            {% for error in form.name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+
+        <div class="form-grid">
+            <div class="field">
+                {{ form.category.label }}
+                {{ form.category() }}
+                {% for error in form.category.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+            <div class="field">
+                {{ form.subcategory.label }}
+                {{ form.subcategory() }}
+                {% for error in form.subcategory.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+        </div>
+
+        <div class="field">
+            {{ form.description.label }}
+            {{ form.description(rows="4") }}
+            {% for error in form.description.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+
+        <div class="form-grid">
+            <div class="field">
+                {{ form.price.label }}
+                {{ form.price(step="0.01", min="0.01") }}
+                {% for error in form.price.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+            <div class="field">
+                {{ form.stock_quantity.label }}
+                {{ form.stock_quantity(min="0") }}
+                {% for error in form.stock_quantity.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            {{ form.submit(class_="button button-primary") }}
+            <a class="button button-secondary" href="{{ url_for('products.list_products_view') }}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión | Tienda didáctica{% endblock %}
+
+{% block content %}
+<section class="auth-layout">
+    <div>
+        <p class="eyebrow">Sesión 1</p>
+        <h1>Iniciar sesión</h1>
+        <p>Utiliza la cuenta de demostración para consultar y registrar productos.</p>
+
+        <form method="post" class="form-card" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="field">
+                {{ form.username.label }}
+                {{ form.username(autocomplete="username") }}
+                {% for error in form.username.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+
+            <div class="field">
+                {{ form.password.label }}
+                {{ form.password(autocomplete="current-password") }}
+                {% for error in form.password.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+
+            {{ form.submit(class_="button button-primary") }}
+        </form>
+    </div>
+
+    <aside class="demo-note">
+        <h2>Cuenta de demostración</h2>
+        <dl>
+            <dt>Usuario</dt>
+            <dd><code>alumno</code></dd>
+            <dt>Contraseña</dt>
+            <dd><code>Taller2026!</code></dd>
+        </dl>
+        <p>Estas credenciales son exclusivamente didácticas. Las contraseñas se comparan mediante un hash y no se muestran desde el almacén de usuarios.</p>
+    </aside>
+</section>
+{% endblock %}

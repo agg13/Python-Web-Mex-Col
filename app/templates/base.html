@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Tienda didáctica{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="{{ url_for('main.home') }}">Tienda didáctica</a>
+            {% if current_user %}
+                <nav aria-label="Navegación principal">
+                    <a href="{{ url_for('products.list_products_view') }}">Productos</a>
+                    <a href="{{ url_for('products.create_product') }}">Registrar producto</a>
+                    <form class="inline-form" method="post" action="{{ url_for('auth.logout') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="link-button" type="submit">Cerrar sesión</button>
+                    </form>
+                </nav>
+            {% else %}
+                <nav aria-label="Navegación principal">
+                    <a href="{{ url_for('main.home') }}">Inicio</a>
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                </nav>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <section class="messages" aria-label="Mensajes del sistema">
+                    {% for category, message in messages %}
+                        <div class="message message-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            Ejercicio formativo: los datos se reinician cuando se reinicia la aplicación.
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio | Tienda didáctica{% endblock %}
+
+{% block content %}
+<section class="empty-state">
+    <p class="eyebrow">Proyecto inicial</p>
+    <h1>El entorno está preparado</h1>
+    <p>La estructura, formularios y datos ficticios están disponibles. Durante la sesión se completará el login, la protección del catálogo y el registro de productos.</p>
+    <div class="form-actions center-actions">
+        <a class="button button-primary" href="{{ url_for('auth.login') }}">Abrir login</a>
+        <a class="button button-secondary" href="{{ url_for('products.list_products_view') }}">Revisar catálogo inicial</a>
+    </div>
+</section>
+{% endblock %}
