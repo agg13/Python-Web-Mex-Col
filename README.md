@@ -1,93 +1,33 @@
-# Proyecto inicial — Sesión 1
+# Código inicial de la sesión 2
 
-Este es el punto de partida del proyecto. La aplicación se puede instalar y ejecutar, pero la lógica principal de autenticación y productos está intencionalmente incompleta para desarrollarla durante el taller.
+Este directorio contiene el punto de partida común para la segunda sesión. Incluye el resultado completo de la sesión 1: módulo `info`, autenticación, rutas protegidas, catálogo, registro de productos y presentación de existencias agotadas.
 
-## Manuales incluidos
+La aplicación continúa utilizando datos en memoria. Durante la sesión se conectará con PostgreSQL mediante Docker Compose y SQLAlchemy.
 
-La carpeta `manuales` contiene materiales dirigidos a cualquier persona que revise o ejecute el repositorio:
+## Antes de iniciar
 
-- [Preparación del entorno](manuales/preparacion_entorno.md).
-- [Guía rápida de Linux](manuales/guia_rapida_linux.md).
-- [Guía de apoyo: Flask, Jinja2 y WTForms](manuales/guia_flask_jinja_wtforms.md).
-- [Lista de comprobación previa](manuales/lista_comprobacion_previa.md).
+1. Copiar `.env.example` como `.env`.
+2. Activar el entorno virtual.
+3. Instalar las dependencias de `requirements.txt`.
+4. Ejecutar `python run.py` y confirmar que el resultado de la sesión 1 sigue funcionando.
+5. Revisar los bloques marcados como `TODO SESIÓN 2`.
 
-Los manuales indican su versión y fecha de publicación, y se actualizarán conforme avance el proyecto.
+## Archivos de trabajo
 
-## Qué está preparado
-
-- Estructura modular de Flask.
-- Fábrica `create_app`.
-- Configuración y variables de entorno.
-- Blueprints de inicio, autenticación y productos.
-- Formularios y validadores.
-- Plantillas y estilos.
-- Dos usuarios didácticos con contraseñas convertidas a hash.
-- Catálogo ficticio de 20 productos.
-- Funciones auxiliares para consultar y agregar productos en memoria.
-- Espacio para modelos SQLAlchemy.
-- Variables previstas para PostgreSQL.
-
-## Qué está incompleto intencionalmente
-
-Los archivos contienen comentarios `TODO SESIÓN 1` para completar:
-
-- autenticación de credenciales;
-- creación de la sesión;
-- cierre de sesión;
-- protección de rutas;
-- envío del catálogo a la plantilla;
-- conexión del formulario con el registro en memoria;
-- presentación de productos agotados.
-- creación de un módulo `info`, su blueprint, la ruta `/info` y su plantilla.
-
-## Resultado inicial
-
-Al ejecutar el proyecto se muestra una página de preparación. Se puede abrir el formulario de login y las rutas de productos, pero todavía no existe un flujo funcional completo.
-
-Esto permite comprobar instalación y estructura antes de comenzar, sin entregar resuelta la actividad principal.
-
-## Preparación
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-cp .env.example .env
-```
-
-## Ejecución
-
-```bash
-python run.py
-```
-
-Abrir <http://127.0.0.1:5001>.
-
-## Credenciales que se utilizarán durante el taller
-
-| Dato | Valor |
+| Archivo | Trabajo de la sesión |
 |---|---|
-| Usuario | `alumno` |
-| Contraseña | `Taller2026!` |
+| `compose.yaml` | Iniciar y comprobar PostgreSQL |
+| `.env` | Cambiar el modo de datos y revisar la conexión |
+| `app/models/__init__.py` | Definir los modelos `User` y `Product` |
+| `app/models/seed.py` | Crear usuarios y productos iniciales |
+| `app/__init__.py` | Inicializar SQLAlchemy, crear tablas y cargar datos |
+| `app/auth/store.py` | Sustituir la búsqueda en memoria por consultas SQLAlchemy |
+| `app/products/store.py` | Sustituir la lista por consultas y transacciones |
+| `app/auth/routes.py` | Adaptar el acceso a los atributos del modelo `User` |
+| `app/products/routes.py` | Adaptar el acceso al identificador del modelo `Product` |
+| Plantillas | Actualizar los mensajes que todavía indican almacenamiento en memoria |
 
-## Archivos principales de trabajo
+## Resultado esperado
 
-| Archivo | Trabajo previsto |
-|---|---|
-| `app/auth/store.py` | Completar la comprobación de credenciales |
-| `app/auth/routes.py` | Crear sesión, proteger rutas y cerrar sesión |
-| `app/products/routes.py` | Enviar catálogo y registrar productos |
-| `app/templates/products/list.html` | Mostrar productos agotados |
-| `app/info/` y `app/templates/info/` | Crear un módulo mínimo, su ruta y su plantilla |
-| `app/__init__.py` | Registrar el nuevo blueprint `info_bp` |
-
-## Preparación para la sesión 2
-
-- `config.py` reconoce `DATA_MODE` y `DATABASE_URL`.
-- `app/extensions.py` declara `db`.
-- `app/models` reserva el lugar de `User` y `Product`.
-- Los nombres de los diccionarios coinciden con los atributos previstos de `Product`.
-
-No cambiar `DATA_MODE=database` durante la sesión 1.
+Al finalizar, los usuarios y productos deberán conservarse después de reiniciar Flask. El formulario y la lógica de venta permanecerán fuera de este código porque corresponden a la práctica posterior.
 

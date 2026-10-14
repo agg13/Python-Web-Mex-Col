@@ -11,10 +11,9 @@ products_bp = Blueprint("products", __name__, url_prefix="/products")
 @products_bp.get("")
 @login_required
 def list_products_view():
-    # TODO SESIÓN 1: sustituir la lista vacía por list_products().
     return render_template(
         "products/list.html",
-        products=[],
+        products=list_products(),
     )
 
 
@@ -23,11 +22,16 @@ def list_products_view():
 def create_product():
     form = ProductForm()
     if form.validate_on_submit():
-        # TODO SESIÓN 1:
-        # 1. Enviar los datos validados a add_product.
-        # 2. Mostrar el identificador generado.
-        # 3. Redirigir al catálogo.
-        _ = add_product, list_products, redirect, url_for
-        flash("La lógica de registro se completará durante la sesión.", "warning")
+        product = add_product(
+            name=form.name.data,
+            category=form.category.data,
+            subcategory=form.subcategory.data,
+            description=form.description.data,
+            price=form.price.data,
+            stock_quantity=form.stock_quantity.data,
+        )
+        # TODO SESIÓN 2: acceder a product.id cuando Product sea un modelo.
+        flash(f"Producto #{product['id']} registrado correctamente.", "success")
+        return redirect(url_for("products.list_products_view"))
 
     return render_template("products/new.html", form=form)
