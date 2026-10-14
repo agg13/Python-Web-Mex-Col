@@ -38,7 +38,11 @@
                     <td class="number">${{ "%.2f"|format(product.price) }}</td>
                     <td class="number">
                         <span class="stock {% if product.stock_quantity == 0 %}stock-empty{% endif %}">
-                            {{ product.stock_quantity }}
+                            {% if product.stock_quantity == 0 %}
+                                Agotado
+                            {% else %}
+                                {{ product.stock_quantity }}
+                            {% endif %}
                         </span>
                     </td>
                 </tr>

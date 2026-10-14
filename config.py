@@ -13,8 +13,9 @@ class BaseConfig:
 
     SECRET_KEY = os.getenv("SECRET_KEY", "development-only-change-me")
     DATA_MODE = os.getenv("DATA_MODE", "memory").lower()
+    AUTO_INIT_DB = os.getenv("AUTO_INIT_DB", "false").lower() == "true"
 
-    # Se inicializará en la sesión 2 cuando DATA_MODE cambie a database.
+    # TODO SESIÓN 2: identificar usuario, contraseña, host, puerto y base.
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL",
         "postgresql+psycopg://taller_user:taller_password@localhost:5432/taller_store",
@@ -29,4 +30,5 @@ class TestConfig(BaseConfig):
     TESTING = True
     SECRET_KEY = "test-secret-key"
     DATA_MODE = "memory"
+    AUTO_INIT_DB = False
     WTF_CSRF_ENABLED = False

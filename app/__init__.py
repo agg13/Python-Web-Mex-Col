@@ -15,24 +15,21 @@ def create_app(config_object=BaseConfig):
 
     csrf.init_app(app)
 
-    # En la sesión 1 el catálogo vive en memoria. La extensión ya está
-    # preparada y se activará al cambiar DATA_MODE en la sesión 2.
+    # TODO SESIÓN 2: después de definir User y Product, inicializar la
+    # extensión, crear las tablas y ejecutar seed_database cuando
+    # AUTO_INIT_DB sea verdadero.
     if app.config["DATA_MODE"] == "database":
         db.init_app(app)
 
     from .main.routes import main_bp
     from .auth.routes import auth_bp
+    from .info.routes import info_bp
     from .products.routes import products_bp
-
-    # MINI ACTIVIDAD GUIADA:
-    # 1. Crear app/info/routes.py y definir info_bp.
-    # 2. Importar aquí info_bp.
-    # 3. Registrar el blueprint después de los módulos existentes.
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(info_bp)
     app.register_blueprint(products_bp)
-    # app.register_blueprint(info_bp)
 
     @app.before_request
     def load_current_user():

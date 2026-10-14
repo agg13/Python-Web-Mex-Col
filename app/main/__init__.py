@@ -1,1 +1,1 @@
-"""Página inicial del proyecto de la sesión 1."""
+"""Página inicial del resultado de la sesión 1."""

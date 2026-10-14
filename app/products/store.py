@@ -31,10 +31,13 @@ _products = deepcopy(_INITIAL_PRODUCTS)
 def list_products():
     """Devuelve una copia superficial para evitar cambios desde la plantilla."""
 
+    # TODO SESIÓN 2: consultar Product y ordenar por id.
     return [product.copy() for product in _products]
 
 
 def add_product(*, name, category, subcategory, description, price, stock_quantity):
+    # TODO SESIÓN 2: crear Product, agregarlo a db.session y confirmar.
+    # Si ocurre un error, revertir la transacción antes de propagarlo.
     product = {
         "id": max((item["id"] for item in _products), default=0) + 1,
         "name": name.strip(),

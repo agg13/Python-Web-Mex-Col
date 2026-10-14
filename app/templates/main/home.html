@@ -4,12 +4,12 @@
 
 {% block content %}
 <section class="empty-state">
-    <p class="eyebrow">Proyecto inicial</p>
-    <h1>El entorno está preparado</h1>
-    <p>La estructura, formularios y datos ficticios están disponibles. Durante la sesión se completará el login, la protección del catálogo y el registro de productos.</p>
+    <p class="eyebrow">Resultado de la sesión 1</p>
+    <h1>La aplicación está funcional</h1>
+    <p>El login, la protección de rutas, el catálogo y el registro de productos en memoria están terminados.</p>
     <div class="form-actions center-actions">
-        <a class="button button-primary" href="{{ url_for('auth.login') }}">Abrir login</a>
-        <a class="button button-secondary" href="{{ url_for('products.list_products_view') }}">Revisar catálogo inicial</a>
+        <a class="button button-primary" href="{{ url_for('auth.login') }}">Iniciar sesión</a>
+        <a class="button button-secondary" href="{{ url_for('products.list_products_view') }}">Abrir catálogo</a>
     </div>
 </section>
 {% endblock %}
